@@ -1,0 +1,11 @@
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\bin\Debug\WinForm_Midterm_Paint.exe.config
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\bin\Debug\WinForm_Midterm_Paint.exe
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\bin\Debug\WinForm_Midterm_Paint.pdb
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.csproj.AssemblyReference.cache
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.csproj.SuggestedBindingRedirects.cache
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.MainForm.resources
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.Properties.Resources.resources
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.csproj.GenerateResource.cache
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.csproj.CoreCompileInputs.cache
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.exe
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.pdb
