@@ -15,6 +15,12 @@ namespace WinForm_Midterm_Paint
     {
         private bool btnLine = false;
         private bool btnEllipse = false;
+        private bool btnFillEllipse = false;
+        private bool btnRect = false;
+        private bool btnFillRect = false;
+        private bool btnCircle = false;
+        private bool btnFillCircle = false;
+        private bool btnArc = false;
 
         private bool isDrawing = false;
         private bool isMultiSelecting = false;
@@ -24,6 +30,7 @@ namespace WinForm_Midterm_Paint
         private List<Shape> shapeList = new List<Shape>();
 
         private Pen newPen = new Pen(Color.Black, 5);
+        private Brush newBrush = new SolidBrush(Color.Green);
 
         private void AddList(MouseEventArgs e)
         {
@@ -35,9 +42,51 @@ namespace WinForm_Midterm_Paint
 
             if (btnEllipse)
             {
-                Ellipse newEllipse = new Ellipse(e.Location, e.Location, newPen, 
-                    new Rectangle(e.Location, new Size(0,0)));
+                Ellipse newEllipse = new Ellipse(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)));
                 shapeList.Add(newEllipse);
+            }
+
+            if (btnFillEllipse)
+            {
+                FillEllipse newFillEllipse = new FillEllipse(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)), newBrush);
+                shapeList.Add(newFillEllipse);
+            }
+
+            if (btnRect)
+            {
+                Rectangles newRect = new Rectangles(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)));
+                shapeList.Add(newRect);
+            }
+
+            if (btnFillRect)
+            {
+                FillRect newFillRect = new FillRect(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)), newBrush);
+                shapeList.Add(newFillRect);
+            }
+
+            if (btnCircle)
+            {
+                Circle newCircle = new Circle(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)));
+                shapeList.Add(newCircle);
+            }
+
+            if (btnFillCircle)
+            {
+                FillCircle newFillCir = new FillCircle(e.Location, e.Location, newPen,
+                    new Rectangle(e.Location, new Size(0, 0)), newBrush);
+                shapeList.Add(newFillCir);
+            }
+
+            if (btnArc)
+            {
+                Arc newArc = new Arc(new Point(e.Location.X - 1, e.Location.Y - 1), e.Location , newPen,
+                    new Rectangle(e.Location, new Size(1, 1)));
+                shapeList.Add(newArc);
             }
         }
         public MainForm()
@@ -58,7 +107,8 @@ namespace WinForm_Midterm_Paint
 
         private void drawPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            if (btnLine || btnEllipse)
+            if (btnLine || btnEllipse || btnFillEllipse || btnRect || btnFillRect ||
+                btnCircle || btnFillCircle || btnArc)
             {
                 isDrawing = true;
                 AddList(e);
@@ -114,10 +164,16 @@ namespace WinForm_Midterm_Paint
                         }
                     }
 
+                    // move, unselect
                     if (shapeList[i].IsSelected)
                     {
                         //move
-                        if (shapeList[i].Path.IsVisible(e.Location) || isMultiSelecting)
+                        if ((shapeList[i].Path.IsVisible(e.Location) || isMultiSelecting ) 
+                            // prioritize the resize feature
+                            && !shapeList[i].ResizeTopLeft.IsVisible(e.Location) 
+                            && !shapeList[i].ResizeTopRight.IsVisible(e.Location)
+                            && !shapeList[i].ResizeBottomLeft.IsVisible(e.Location)
+                            && !shapeList[i].ResizeBottomRight.IsVisible(e.Location))
                         {
                             shapeList[i].IsMoving = true;
 
@@ -197,17 +253,55 @@ namespace WinForm_Midterm_Paint
             // btn reset
             btnLine = false;
             btnEllipse = false;
+            btnFillEllipse = false;
+            btnRect = false;
+            btnFillRect = false;
+            btnCircle = false;
+            btnFillCircle= false;
+            btnArc = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // btn trigger
+        private void lineBtn_Click(object sender, EventArgs e)
         {
             btnLine = true;
 
             //other false
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void ellipse_Click(object sender, EventArgs e)
         {
             btnEllipse = true;
+        }
+
+        private void fillEllipseBtn_Click(object sender, EventArgs e)
+        {
+            btnFillEllipse = true;
+        }
+
+        private void rectBtn_Click(object sender, EventArgs e)
+        {
+            btnRect = true;
+        }
+
+        private void fillRectBtn_Click(object sender, EventArgs e)
+        {
+            btnFillRect = true;
+        }
+
+        private void circleBtn_Click(object sender, EventArgs e)
+        {
+            btnCircle = true;
+        }
+
+        private void fillCircleBtn_Click(object sender, EventArgs e)
+        {
+            btnFillCircle = true;
+        }
+
+        private void arcBtn_Click(object sender, EventArgs e)
+        {
+            btnArc = true;
         }
     }
 

@@ -196,7 +196,7 @@ namespace WinForm_Midterm_Paint
             this.ellipseRect = ellipseRect;
         }
 
-        private void UpdateRect()
+        protected void UpdateRect()
         {
             ellipseRect = new Rectangle(P1, new Size(P2.X - P1.X, P2.Y - P1.Y));
         }
@@ -215,6 +215,186 @@ namespace WinForm_Midterm_Paint
         {
             base.MoveShape(e);
             UpdateRect();
+        }
+    }
+
+    public class FillEllipse: Ellipse
+    {
+        private Brush brush;
+        public Brush Brush { get => brush; set => brush = value; }
+        public FillEllipse(Point p1, Point p2, Pen pen, Rectangle ellipseRect, Brush brush) : base(p1, p2, pen, ellipseRect)
+        {
+            this.brush = brush;
+        }
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateRect();
+            e.Graphics.FillEllipse(brush, EllipseRect);
+        }
+    }
+
+    public class Rectangles: Shape
+    {
+        private Rectangle rectRect;
+        public Rectangle RectRect { get => rectRect; set => rectRect = value; }
+
+        public Rectangles(Point p1, Point p2, Pen pen, Rectangle rectRect) : base(p1, p2, pen)
+        {
+            this.rectRect = rectRect;
+        }
+        protected void UpdateRect()
+        {
+            rectRect = new Rectangle(P1, new Size(P2.X - P1.X, P2.Y - P1.Y));
+        }
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateRect();
+            e.Graphics.DrawRectangle(Pen, rectRect);
+        }
+        public override void UpdateShape(ShapePos resizePos, MouseEventArgs e)
+        {
+            base.UpdateShape(resizePos, e);
+            UpdateRect();
+        }
+        public override void MoveShape(MouseEventArgs e)
+        {
+            base.MoveShape(e);
+            UpdateRect();
+        }
+    }
+
+    public class FillRect: Rectangles
+    {
+        private Brush brush;
+        public Brush Brush { get => brush; set => brush = value; }
+
+        public FillRect(Point p1, Point p2, Pen pen, Rectangle ellipseRect, Brush brush) : base(p1, p2, pen, ellipseRect)
+        {
+            this.brush = brush;
+        }
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateRect();
+            e.Graphics.FillRectangle(brush, RectRect);
+        }
+    }
+
+    public class Circle: Shape
+    {
+        private Rectangle circleRect;
+        public Rectangle CircleRect { get => circleRect; set => circleRect = value; }
+
+        public Circle(Point p1, Point p2, Pen pen, Rectangle ellipseRect) : base(p1, p2, pen)
+        {
+            this.circleRect = ellipseRect;
+        }
+
+        protected void UpdateRect()
+        {
+            circleRect = new Rectangle(P1, new Size(P2.X - P1.X, P2.Y - P1.Y));
+        }
+
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateRect();
+            e.Graphics.DrawEllipse(Pen, circleRect);
+        }
+        public override void UpdateShape(ShapePos resizePos, MouseEventArgs e)
+        {
+            int distance = 0; // distance from mouse location to the opposite point (unchanged point)
+
+            switch (resizePos)
+            {
+                case ShapePos.TopLeft:
+                    {
+                        distance = P2.X - e.Location.X;
+
+                        P1 = new Point(P2.X - distance, P2.Y - distance);
+                        break;
+                    }
+                case ShapePos.TopRight:
+                    {
+                        distance = e.Location.X - P1.X;
+
+                        P1 = new Point(P1.X, P2.Y - distance);
+                        P2 = new Point(P1.X + distance, P2.Y);
+                        break;
+                    }
+                case ShapePos.BottomLeft:
+                    {
+                        distance = P2.X - e.Location.X;
+
+                        P1 = new Point(P2.X - distance, P1.Y);
+                        P2 = new Point(P2.X , P1.Y + distance);
+                        break;
+                    }
+                case ShapePos.BottomRight:
+                    {
+                        distance = e.Location.X - P1.X;
+
+                        P2 = new Point(P1.X + distance, P1.Y +distance);
+                        break;
+                    }
+            }
+
+            UpdateRect();
+        }
+        public override void MoveShape(MouseEventArgs e)
+        {
+            base.MoveShape(e);
+            UpdateRect();
+        }
+    }
+
+    public class FillCircle: Circle
+    {
+        private Brush brush;
+        public Brush Brush { get => brush; set => brush = value; }
+        public FillCircle(Point p1, Point p2, Pen pen, Rectangle circleRect, Brush brush) : base(p1, p2, pen, circleRect)
+        {
+            this.brush = brush;
+        }
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateRect();
+            e.Graphics.FillEllipse(brush, CircleRect);
+        }
+    }
+
+    public class Arc: Shape
+    {
+        private Rectangle arcRect;
+        public Rectangle ArcRect { get => arcRect; set => arcRect = value; }
+
+        public Arc(Point p1, Point p2, Pen pen, Rectangle arcRect) : base(p1, p2, pen)
+        {
+            this.arcRect = arcRect;
+        }
+
+        protected void UpdateArcRect()
+        {
+            arcRect = new Rectangle(
+                new Point(P1.X, P1.Y - (P2.Y-P1.Y)), // left to right
+                //new Point(P1.X - (P2.X - P1.X), P1.Y - (P2.Y - P1.Y)), // right to left
+                new Size((P2.X - P1.X)*2, (P2.Y - P1.Y)*2));
+        }
+
+        public override void DrawShape(PaintEventArgs e)
+        {
+            UpdateArcRect();
+
+            e.Graphics.DrawArc(Pen, arcRect, 90, 90); // left to right
+            //e.Graphics.DrawArc(Pen, arcRect, 0, 90);    // right to left
+        }
+        public override void UpdateShape(ShapePos resizePos, MouseEventArgs e)
+        {
+            base.UpdateShape(resizePos, e);
+            UpdateArcRect();
+        }
+        public override void MoveShape(MouseEventArgs e)
+        {
+            base.MoveShape(e);
+            UpdateArcRect();
         }
     }
 }

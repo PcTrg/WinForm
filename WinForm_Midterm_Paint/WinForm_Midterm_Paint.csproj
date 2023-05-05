@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,6 +80,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\arc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\diagonal-line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\dry-clean.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\ellipse %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\hexagon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\new-moon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\polygon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\rectangle %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\rectangle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
