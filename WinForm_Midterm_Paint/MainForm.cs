@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace WinForm_Midterm_Paint
 {
@@ -27,8 +29,6 @@ namespace WinForm_Midterm_Paint
         private bool btnHexagon = false;
         private bool btnFillHex = false;
 
-        private bool isCollapsed = true;
-
         private bool isDrawing = false;
         private bool isMultiSelecting = false;
 
@@ -39,10 +39,12 @@ namespace WinForm_Midterm_Paint
         private Color selectedColor = Color.Black;
         private Pen newPen = new Pen(Color.Black, 5);
         private Brush newBrush = new SolidBrush(Color.Black);
+        private DashStyle newDash = new DashStyle();
 
         private void AddList(MouseEventArgs e)
         {
             newPen = new Pen(selectedColor, thickness);
+            newPen.DashStyle = newDash;
             newBrush = new SolidBrush(selectedColor);
 
             if (btnLine)
@@ -119,12 +121,16 @@ namespace WinForm_Midterm_Paint
             }
         }
 
-        private void Uncollapse()
+        private void StopShowOption()
         {
-            if (!isCollapsed)
+            if (sizePanel.Visible)
             {
-                sizePanel.Size = sizePanel.MinimumSize;
-                isCollapsed = true;
+                sizePanel.Visible = false;
+            }
+
+            if (dashStylePanel.Visible)
+            {
+                dashStylePanel.Visible = false;
             }
         }
 
@@ -133,6 +139,10 @@ namespace WinForm_Midterm_Paint
         {
             InitializeComponent();
             drawPanel.SetDoubleBuffered();
+
+            newPen.DashStyle = DashStyle.Solid;
+            sizePanel.Visible = false;
+            dashStylePanel.Visible = false;
         }
 
         private void drawPanel_Paint(object sender, PaintEventArgs e)
@@ -308,22 +318,22 @@ namespace WinForm_Midterm_Paint
 
         private void MainForm_Click(object sender, EventArgs e)
         {
-            Uncollapse();
+            StopShowOption();
         }
 
         private void sizePanel_Click(object sender, EventArgs e)
         {
-            Uncollapse();
+            StopShowOption();
         }
 
         private void menuPanel_Click(object sender, EventArgs e)
         {
-            Uncollapse();
+            StopShowOption();
         }
 
         private void drawPanel_Click(object sender, EventArgs e)
         {
-            Uncollapse();
+            StopShowOption();
         }
 
         // btn shapes
@@ -502,34 +512,74 @@ namespace WinForm_Midterm_Paint
         // size btn
         private void sizeBtn_Click(object sender, EventArgs e)
         {
-            if (isCollapsed)
+            if (!sizePanel.Visible)
             {
-                sizePanel.Size = sizePanel.MaximumSize;
-                isCollapsed = false;
+                sizePanel.Visible = true;
             }
             else
             {
-                sizePanel.Size = sizePanel.MinimumSize;
-                isCollapsed = true;
+                sizePanel.Visible = false;
             }
         }
 
         private void size1Btn_Click(object sender, EventArgs e)
         {
             thickness = 5;
-            Uncollapse();
+            StopShowOption();
         }
 
         private void size2Btn_Click(object sender, EventArgs e)
         {
             thickness = 10;
-            Uncollapse();
+            StopShowOption();
         }
 
         private void size3Btn_Click(object sender, EventArgs e)
         {
             thickness = 15;
-            Uncollapse();
+            StopShowOption();
+        }
+
+        // dashstyle btn
+        private void dashStyleBtn_Click(object sender, EventArgs e)
+        {
+            if (!dashStylePanel.Visible)
+            {
+                dashStylePanel.Visible = true;
+            }
+            else
+            {
+                dashStylePanel.Visible = false;
+            }
+        }
+        private void dashBtn_Click(object sender, EventArgs e)
+        {
+            newDash = DashStyle.Dash;
+            StopShowOption();
+        }
+
+        private void dotBtn_Click(object sender, EventArgs e)
+        {
+            newDash = DashStyle.Dot;
+            StopShowOption();
+        }
+
+        private void dashDotBtn_Click(object sender, EventArgs e)
+        {
+            newDash = DashStyle.DashDot;
+            StopShowOption();
+        }
+
+        private void dashDotDotBtn_Click(object sender, EventArgs e)
+        {
+            newDash = DashStyle.DashDotDot;
+            StopShowOption();
+        }
+
+        private void SolidBtn_Click(object sender, EventArgs e)
+        {
+            newDash = DashStyle.Solid;
+            StopShowOption();
         }
 
         //delete btn
@@ -548,15 +598,20 @@ namespace WinForm_Midterm_Paint
                 Graphics eg = Graphics.FromImage(bmp);
 
                 drawPanel.DrawToBitmap(bmp, new Rectangle(0, 0, drawPanel.Width, drawPanel.Height));
-                bmp.Save(@"\\Mac\Home\Desktop\Image.png", ImageFormat.Png);
 
-                MessageBox.Show("Success");
+                // Show a save file dialog box to the user
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "PNG Files (*.png)|*.png|JPEG Files (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    bmp.Save(saveFileDialog1.FileName);
+                    MessageBox.Show("Success");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
     }

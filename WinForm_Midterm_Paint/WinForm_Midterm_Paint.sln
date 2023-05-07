@@ -5,12 +5,6 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm_Midterm_Paint", "WinForm_Midterm_Paint.csproj", "{3FBD4F36-59BD-42F1-9CEB-CADC8E6BB570}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winform_W3_C3_practiceC3_Ex2", "C:\Users\NguyenTruong\source\repos\Winform_W3_C3_practiceC3_Ex2\Winform_W3_C3_practiceC3_Ex2\Winform_W3_C3_practiceC3_Ex2.csproj", "{F975AE96-899A-4189-A563-F21F2EE88726}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winform_W5_C3_Timer", "C:\Users\NguyenTruong\source\repos\Winform_W5_C3_Timer\Winform_W5_C3_Timer\Winform_W5_C3_Timer.csproj", "{8FBB8915-687A-45C9-AA1B-7FE9FBDC76BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownPanelDemo", "..\..\..\Desktop\WinformProgram\DropDownPanel-master\DropDownPanel-master\DropDownPanelDemo\DropDownPanelDemo\DropDownPanelDemo.csproj", "{A462E53B-356B-4941-BFAF-12736353FFBD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,18 +15,6 @@ Global
 		{3FBD4F36-59BD-42F1-9CEB-CADC8E6BB570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FBD4F36-59BD-42F1-9CEB-CADC8E6BB570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FBD4F36-59BD-42F1-9CEB-CADC8E6BB570}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F975AE96-899A-4189-A563-F21F2EE88726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F975AE96-899A-4189-A563-F21F2EE88726}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F975AE96-899A-4189-A563-F21F2EE88726}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F975AE96-899A-4189-A563-F21F2EE88726}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FBB8915-687A-45C9-AA1B-7FE9FBDC76BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FBB8915-687A-45C9-AA1B-7FE9FBDC76BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FBB8915-687A-45C9-AA1B-7FE9FBDC76BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FBB8915-687A-45C9-AA1B-7FE9FBDC76BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A462E53B-356B-4941-BFAF-12736353FFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A462E53B-356B-4941-BFAF-12736353FFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A462E53B-356B-4941-BFAF-12736353FFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A462E53B-356B-4941-BFAF-12736353FFBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
