@@ -9,3 +9,4 @@
 \\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.csproj.CoreCompileInputs.cache
 \\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.exe
 \\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.pdb
+\\Mac\Home\Documents\VS2022Window_Projects\WinForm_Midterm_Paint\obj\Debug\WinForm_Midterm_Paint.Form1.resources

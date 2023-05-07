@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -395,6 +396,102 @@ namespace WinForm_Midterm_Paint
         {
             base.MoveShape(e);
             UpdateArcRect();
+        }
+    }
+
+    public class Hexagon: Shape
+    {
+        private Point[] points;
+        public Point[] Points { get => points; set => points = value; }
+
+        public Hexagon(Point p1, Point p2, Pen pen, Point[] points) : base(p1, p2, pen)
+        {
+            this.points = points;
+        }
+
+        protected void CalculateHexagonPoint()
+        {
+            // Calculate the position and size of the hexagon
+            int hexSize = Math.Min(Math.Abs(P2.X - P1.X), Math.Abs(P2.Y - P1.Y));
+            int hexX = Math.Min(P1.X, P2.X);
+            int hexY = Math.Min(P1.Y, P2.Y);
+
+            // Define the points of the hexagon
+            points = new Point[6];
+            for (int i = 0; i < 6; i++)
+            {
+                double angle_deg = 60 * i - 30;
+                double angle_rad = Math.PI / 180 * angle_deg;
+                points[i] = new Point(
+                    (int)(hexX + hexSize / 2 + hexSize / 2 * Math.Cos(angle_rad)),
+                    (int)(hexY + hexSize / 2 + hexSize / 2 * Math.Sin(angle_rad))
+                    );
+            }
+        }
+
+        public override void DrawShape(PaintEventArgs e)
+        {
+            CalculateHexagonPoint();
+            e.Graphics.DrawPolygon(Pen, points);
+        }
+        public override void UpdateShape(ShapePos resizePos, MouseEventArgs e)
+        {
+            int distance = 0; // distance from mouse location to the opposite point (unchanged point)
+
+            switch (resizePos)
+            {
+                case ShapePos.TopLeft:
+                    {
+                        distance = P2.X - e.Location.X;
+
+                        P1 = new Point(P2.X - distance, P2.Y - distance);
+                        break;
+                    }
+                case ShapePos.TopRight:
+                    {
+                        distance = e.Location.X - P1.X;
+
+                        P1 = new Point(P1.X, P2.Y - distance);
+                        P2 = new Point(P1.X + distance, P2.Y);
+                        break;
+                    }
+                case ShapePos.BottomLeft:
+                    {
+                        distance = P2.X - e.Location.X;
+
+                        P1 = new Point(P2.X - distance, P1.Y);
+                        P2 = new Point(P2.X, P1.Y + distance);
+                        break;
+                    }
+                case ShapePos.BottomRight:
+                    {
+                        distance = e.Location.X - P1.X;
+
+                        P2 = new Point(P1.X + distance, P1.Y + distance);
+                        break;
+                    }
+            }
+            CalculateHexagonPoint();
+        }
+        public override void MoveShape(MouseEventArgs e)
+        {
+            base.MoveShape(e);
+            CalculateHexagonPoint();
+        }
+    }
+
+    public class FillHexagon: Hexagon
+    {
+        private Brush brush;
+        public Brush Brush { get => brush; set => brush = value; }
+        public FillHexagon(Point p1, Point p2, Pen pen, Point[] points, Brush brush) : base(p1, p2, pen, points)
+        {
+            this.brush = brush;
+        }
+        public override void DrawShape(PaintEventArgs e)
+        {
+            CalculateHexagonPoint();
+            e.Graphics.FillPolygon(brush, Points);
         }
     }
 }

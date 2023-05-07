@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +61,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +119,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon\rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\polygon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\hexagon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\width.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\Collapse Arrow_20px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\Expand Arrow_20px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Icon\Shape_Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\Size1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\size3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\width %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\width %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\width %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\Panel_Icons\bin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
